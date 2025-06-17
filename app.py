@@ -60,13 +60,15 @@ headers = {
 # ✅ 매물 상세 주소 가져오기
 def fetch_detail_address(article_no):
     detail_url = f"https://new.land.naver.com/api/articles/{article_no}?sameAddressGroup=false"
-    res = requests.get(detail_url, headers=headers, cookies=cookies)
-    if res.status_code == 200:
-        try:
+    try:
+        res = requests.get(detail_url, headers=headers, cookies=cookies)
+        if res.status_code == 200:
             detail = res.json()
-            return detail.get("article", {}).get("jibunAddress", "")
-        except:
-            return ""
+            return detail.get("article", {}).get("jibunAddress", "") or detail.get("article", {}).get("roadAddress", "")
+        else:
+            st.warning(f"주소 요청 실패 (articleNo: {article_no}) - 코드: {res.status_code}")
+    except Exception as e:
+        st.warning(f"주소 파싱 오류 (articleNo: {article_no}) - {e}")
     return ""
 
 # ✅ 데이터 가져오기 (최대 8페이지 = 160건)
