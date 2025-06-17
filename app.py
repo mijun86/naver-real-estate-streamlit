@@ -91,20 +91,31 @@ if data:
     st.success(f"📦 {len(data)}건의 매물 데이터를 불러왔습니다.")
     df = pd.DataFrame(data)
 
+    # ✅ 매물링크 컬럼 추가
+    df["매물링크"] = df["articleNo"].apply(
+        lambda x: f'<a href="https://new.land.naver.com/houses?articleNo={x}" target="_blank">🔗 바로가기</a>'
+    )
+
+    # ✅ 표시할 컬럼 설정
     selected_cols = [
         "articleNo", "articleName", "realEstateTypeName", "tradeTypeName",
         "floorInfo", "dealOrWarrantPrc", "areaName", "direction",
         "articleConfirmYmd", "articleFeatureDesc", "buildingName", "realtorName",
-        "매물링크"  # ✅ 링크 컬럼 추가
+        "매물링크"
     ]
     available_cols = [col for col in selected_cols if col in df.columns]
     df = df[available_cols]
 
-    st.dataframe(df, use_container_width=True)
+    # ✅ 표 렌더링 (하이퍼링크 포함)
+    st.markdown(df.to_html(escape=False, index=False), unsafe_allow_html=True)
 
-    st.download_button("📥 CSV 다운로드", df.to_csv(index=False), file_name="관악구_빌라_매물.csv")
+    # ✅ 다운로드 버튼 (링크 HTML은 제거 후 저장)
+    download_df = df.drop(columns=["매물링크"])
+    st.download_button("📥 CSV 다운로드", download_df.to_csv(index=False), file_name="관악구_빌라_매물.csv")
 
+    # ✅ 첫 매물 상세 JSON 보기
     with st.expander("🔍 첫 매물 원본 JSON 보기"):
         st.json(data[0])
 else:
     st.error("❌ 매물을 불러오지 못했습니다. 쿠키 또는 토큰이 만료되었을 수 있습니다.")
+
