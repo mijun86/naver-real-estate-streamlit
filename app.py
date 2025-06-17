@@ -57,11 +57,11 @@ headers = {
     # 'cookie': 'NNB=4OZOYZDNTYJGO; ASID=b765abe900000192b4624be40000004d; nstore_session=oIBAyZjK8Su+JSDr7idwCXUx; recent_card_list=115,1294; _ga=GA1.2.2045887801.1733061999; nstore_pagesession=iHMv5lqlZTr7OwsLUWR-296388; NFS=2; NAC=ytiQBUw5QeyXB; nid_inf=-2054095709; NID_AUT=jo0oYsQi9vqKBF0iFFxtNuUnrAGbg/25ccZWuT4bgI7PMfDyGNQmXEKdhyhnj7QH; NACT=1; page_uid=jaaj9sqVJLhssfzS4GsssssssUZ-224929; nhn.realestate.article.rlet_type_cd=A01; nhn.realestate.article.trade_type_cd=""; nhn.realestate.article.ipaddress_city=1100000000; _fwb=113w8jjFH5TGUTMbGRiBLNf.1750162120152; landHomeFlashUseYn=Y; _fwb=113w8jjFH5TGUTMbGRiBLNf.1750162120152; SRT30=1750170828; SRT5=1750170828; NID_SES=AAABtKx0gfIOgkPjJJWX/T/L8uGQTEWbMUo2dhGFb8tRns/4MHKHRFaXJY92NSfbrmEcKVl2T75wAZ7rHrEkiAHJTYk3EJp/dGSw9o3Fqq9ecj3etdJUP3Y2mY2dzb8yKoxVYGQk3GuSIB/9FtlwKJ6F8FC6zB4xyS/dhfae26RH/0FyYzfxfAHyOT2t9R2Exa3m4E1cGsAK/iP+45OgE2fJQyDHEt3hV18HB5+6K9U1qW2RdKe55IRhJFhf0AT+W6QWPrc2gBglEFmcOyCiQOExXhFSmqnz0+LHK7SsATFYQZVuiSQ75jxHnLmeGOzFB7YAiREEZHbQTxvAytWt8B4k16ACPOUoo0jH6o69RatdT9IBxUL9+5rRNLTeI/D7gEe+bCFg38tpKcpZiuuNR1uNF+AuPYUQx3vCbbxGiR4KwKVvS5D1UaIBlJS/y2zEBVV2Gem2kHoKctMqSC/aFwCpB/QpnMXR+spptfcJUfocr0Q2nI7YyQoFzQipkS/7BZA2SCI+w/U4oNq8aiA5FnPQg/VGPUcBs5dKbH+oCcNQmcZNHMe2oRsYY8eSKhgWG6iC648jnL7q09dHPfQnxZz0HAk=; REALESTATE=Tue%20Jun%2017%202025%2023%3A34%3A42%20GMT%2B0900%20(Korean%20Standard%20Time); PROP_TEST_KEY=1750170882349.ec3bc9b2d3b46d21c2a05775944c52523f66d747ba1a8b1d7d6721308ee8fcf9; PROP_TEST_ID=02d33b5d533e17817c2977fb3ab903cc51820954c4c2727bb31df5322df7cb77; BUC=vhmvCQLFk-dasyjyYI64XT9RJHswvkI1dmK7Y9O0kbQ=',
 }
 
-# ✅ 데이터 크롤링 함수
+# ✅ 데이터 가져오기
 @st.cache_data
 def fetch_data(min_price, max_price, min_area, max_area):
     all_data = []
-    for page in range(1, 9):  # 8페이지 = 최대 160건
+    for page in range(1, 9):  # 최대 160개
         url = (
             f"https://new.land.naver.com/api/articles"
             f"?zoom=18&leftLon=126.9160901&rightLon=126.9261001"
@@ -75,8 +75,6 @@ def fetch_data(min_price, max_price, min_area, max_area):
         if res.status_code == 200:
             try:
                 articles = res.json().get("articleList", [])
-                for a in articles:
-                    a["링크"] = f'<a href="https://new.land.naver.com/houses?articleNo={a["articleNo"]}" target="_blank">🔗</a>'
                 all_data.extend(articles)
             except Exception as e:
                 st.error(f"⚠️ JSON 파싱 오류: {e}")
@@ -84,14 +82,19 @@ def fetch_data(min_price, max_price, min_area, max_area):
             st.warning(f"❌ {page}페이지 요청 실패: {res.status_code}")
     return all_data
 
-# ✅ 데이터 시각화
+# ✅ 시각화
 data = fetch_data(min_price, max_price, min_area, max_area)
 
 if data:
     st.success(f"📦 {len(data)}건의 매물 데이터를 불러왔습니다.")
     df = pd.DataFrame(data)
 
-    # ✅ 컬럼 정리
+    # 🔗 매물 링크 컬럼 추가
+    df["링크"] = df["articleNo"].apply(
+        lambda x: f"https://new.land.naver.com/houses?articleNo={x}"
+    )
+
+    # 🔍 필요한 컬럼만 정리
     selected_cols = [
         "articleNo", "articleName", "realEstateTypeName", "tradeTypeName",
         "floorInfo", "dealOrWarrantPrc", "areaName", "direction",
@@ -101,13 +104,13 @@ if data:
     available_cols = [col for col in selected_cols if col in df.columns]
     df = df[available_cols]
 
-    # ✅ 하이퍼링크 포함 HTML 테이블 렌더링
-    st.markdown(df.to_html(escape=False, index=False), unsafe_allow_html=True)
+    # 📊 정렬 가능 테이블
+    st.dataframe(df, use_container_width=True)
 
-    # ✅ 다운로드용 CSV (링크 제거)
-    download_df = df.drop(columns=["링크"])
-    st.download_button("📥 CSV 다운로드", download_df.to_csv(index=False), file_name="관악구_빌라_매물.csv")
+    # ⬇️ 다운로드 버튼
+    st.download_button("📥 CSV 다운로드", df.to_csv(index=False), file_name="관악구_빌라_매물.csv")
 
+    # 🧾 첫 JSON 원본 보기
     with st.expander("🔍 첫 매물 원본 JSON 보기"):
         st.json(data[0])
 else:
