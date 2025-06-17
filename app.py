@@ -14,7 +14,6 @@ max_area = st.sidebar.slider("📐 최대 전용면적 (㎡)", 0, 100, 51, step=
 
 # 👉 아래에 본인의 Cookie / Header 정보를 넣으세요
 cookies = {
-
     'NNB': '4OZOYZDNTYJGO',
     'ASID': 'b765abe900000192b4624be40000004d',
     'nstore_session': 'oIBAyZjK8Su+JSDr7idwCXUx',
@@ -26,7 +25,6 @@ cookies = {
     'nid_inf': '-2054095709',
     'NID_AUT': 'jo0oYsQi9vqKBF0iFFxtNuUnrAGbg/25ccZWuT4bgI7PMfDyGNQmXEKdhyhnj7QH',
     'NACT': '1',
-    'SRT30': '1750162162',
     'page_uid': 'jaaj9sqVJLhssfzS4GsssssssUZ-224929',
     'nhn.realestate.article.rlet_type_cd': 'A01',
     'nhn.realestate.article.trade_type_cd': '""',
@@ -34,20 +32,21 @@ cookies = {
     '_fwb': '113w8jjFH5TGUTMbGRiBLNf.1750162120152',
     'landHomeFlashUseYn': 'Y',
     '_fwb': '113w8jjFH5TGUTMbGRiBLNf.1750162120152',
-    'NID_SES': 'AAABvfQbqm1F9eXPeSyJi1fdJTlpeFfJGMy/qHJQxMXiQWKr8/2D8NRavIHstQO6gtILELVNz3rlT8D+pDz5OChAT7CUHImKVtiBBQ1eURCN1AG/EdYXPZ6GZG3ivF7r5ObVtDla4H0KFOoLoeXK2IorWBcZE8IQ94W9jGngKrCFrHvqyeqZZ3F8dXQ+lYSIn3dcVN7WboKbvPaEbI6F6p8jlOvHdZdegJ8mWMvTL+NS9Hz4tlW+EFJy8VLn/In5q/eqcITnqrZFBhca/tef5frKTO9tE2NA0tuVHniW+wm4K+UWNUavmCD7K2ubwU5VNA68+QHf0zoyXpRmVSQW77ET59EiuWkOFhMS5EyTGucb0k8Aa9TMiKWg8/TPGb7k6JHJj7e0FkGY71U6LtI43xuHd1bXLgTb4MQJFiIut6ZMwepzzoOfJJ0gazZPQq9EUhEQPR0XZM1lgKfeQgj0GpEMAJYoto61G/yWSQzClnEnI4NOpOMO/TMFts2GsEbvgJsWKYkjaH3XTtTE5kQuuoqZMmz7X09mDkDcRO7M5c/qWmF0MG3+kbO2oIA/PwFz1jKlLVJwlYC6KUNK8YQw20bP0lM=',
-    'SRT5': '1750166706',
-    'REALESTATE': 'Tue%20Jun%2017%202025%2022%3A30%3A19%20GMT%2B0900%20(Korean%20Standard%20Time)',
-    'PROP_TEST_KEY': '1750167019410.359abaadedb8a570068c3ce5bbef1deebc7f2c5a44a37c30a92f6c59ecae9811',
-    'PROP_TEST_ID': '6c9a7f31d79e3a247aebc04adac43927ca9728655e30f34e207d2f28e615b450',
-    'BUC': 'EgVrJOA5lXRHq7tjHzfLtiTxIFCbjlWp6NzKFONubyQ=',
+    'SRT30': '1750170828',
+    'SRT5': '1750170828',
+    'NID_SES': 'AAABtKx0gfIOgkPjJJWX/T/L8uGQTEWbMUo2dhGFb8tRns/4MHKHRFaXJY92NSfbrmEcKVl2T75wAZ7rHrEkiAHJTYk3EJp/dGSw9o3Fqq9ecj3etdJUP3Y2mY2dzb8yKoxVYGQk3GuSIB/9FtlwKJ6F8FC6zB4xyS/dhfae26RH/0FyYzfxfAHyOT2t9R2Exa3m4E1cGsAK/iP+45OgE2fJQyDHEt3hV18HB5+6K9U1qW2RdKe55IRhJFhf0AT+W6QWPrc2gBglEFmcOyCiQOExXhFSmqnz0+LHK7SsATFYQZVuiSQ75jxHnLmeGOzFB7YAiREEZHbQTxvAytWt8B4k16ACPOUoo0jH6o69RatdT9IBxUL9+5rRNLTeI/D7gEe+bCFg38tpKcpZiuuNR1uNF+AuPYUQx3vCbbxGiR4KwKVvS5D1UaIBlJS/y2zEBVV2Gem2kHoKctMqSC/aFwCpB/QpnMXR+spptfcJUfocr0Q2nI7YyQoFzQipkS/7BZA2SCI+w/U4oNq8aiA5FnPQg/VGPUcBs5dKbH+oCcNQmcZNHMe2oRsYY8eSKhgWG6iC648jnL7q09dHPfQnxZz0HAk=',
+    'REALESTATE': 'Tue%20Jun%2017%202025%2023%3A34%3A42%20GMT%2B0900%20(Korean%20Standard%20Time)',
+    'PROP_TEST_KEY': '1750170882349.ec3bc9b2d3b46d21c2a05775944c52523f66d747ba1a8b1d7d6721308ee8fcf9',
+    'PROP_TEST_ID': '02d33b5d533e17817c2977fb3ab903cc51820954c4c2727bb31df5322df7cb77',
+    'BUC': 'vhmvCQLFk-dasyjyYI64XT9RJHswvkI1dmK7Y9O0kbQ=',
 }
 
 headers = {
     'accept': '*/*',
     'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-    'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJFQUxFU1RBVEUiLCJpYXQiOjE3NTAxNjQ4OTYsImV4cCI6MTc1MDE3NTY5Nn0.OYzpcaRhuc6-pVKQIEw4OhPNt3QNWIrhiSUqia0cL6A',
+    'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJFQUxFU1RBVEUiLCJpYXQiOjE3NTAxNzA4ODIsImV4cCI6MTc1MDE4MTY4Mn0.huVrcENrRCqahYQgRHiFNx7ef7g_4G7xh_raWug8X8I',
     'priority': 'u=1, i',
-    'referer': 'https://new.land.naver.com/houses?ms=37.4763358,126.9210951,18&a=VL&b=A1&e=RETAIL&h=15&i=51&ad=true',
+    'referer': 'https://new.land.naver.com/houses?ms=37.4772271,126.922876,15&a=VL&b=A1&e=RETAIL&h=15&i=51&ad=true',
     'sec-ch-ua': '"Google Chrome";v="137", "Chromium";v="137", "Not/A)Brand";v="24"',
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
@@ -55,7 +54,7 @@ headers = {
     'sec-fetch-mode': 'cors',
     'sec-fetch-site': 'same-origin',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36',
-    # 'cookie': 'NNB=4OZOYZDNTYJGO; ASID=b765abe900000192b4624be40000004d; nstore_session=oIBAyZjK8Su+JSDr7idwCXUx; recent_card_list=115,1294; _ga=GA1.2.2045887801.1733061999; nstore_pagesession=iHMv5lqlZTr7OwsLUWR-296388; NFS=2; NAC=ytiQBUw5QeyXB; nid_inf=-2054095709; NID_AUT=jo0oYsQi9vqKBF0iFFxtNuUnrAGbg/25ccZWuT4bgI7PMfDyGNQmXEKdhyhnj7QH; NACT=1; SRT30=1750162162; page_uid=jaaj9sqVJLhssfzS4GsssssssUZ-224929; nhn.realestate.article.rlet_type_cd=A01; nhn.realestate.article.trade_type_cd=""; nhn.realestate.article.ipaddress_city=1100000000; _fwb=113w8jjFH5TGUTMbGRiBLNf.1750162120152; landHomeFlashUseYn=Y; _fwb=113w8jjFH5TGUTMbGRiBLNf.1750162120152; NID_SES=AAABvfQbqm1F9eXPeSyJi1fdJTlpeFfJGMy/qHJQxMXiQWKr8/2D8NRavIHstQO6gtILELVNz3rlT8D+pDz5OChAT7CUHImKVtiBBQ1eURCN1AG/EdYXPZ6GZG3ivF7r5ObVtDla4H0KFOoLoeXK2IorWBcZE8IQ94W9jGngKrCFrHvqyeqZZ3F8dXQ+lYSIn3dcVN7WboKbvPaEbI6F6p8jlOvHdZdegJ8mWMvTL+NS9Hz4tlW+EFJy8VLn/In5q/eqcITnqrZFBhca/tef5frKTO9tE2NA0tuVHniW+wm4K+UWNUavmCD7K2ubwU5VNA68+QHf0zoyXpRmVSQW77ET59EiuWkOFhMS5EyTGucb0k8Aa9TMiKWg8/TPGb7k6JHJj7e0FkGY71U6LtI43xuHd1bXLgTb4MQJFiIut6ZMwepzzoOfJJ0gazZPQq9EUhEQPR0XZM1lgKfeQgj0GpEMAJYoto61G/yWSQzClnEnI4NOpOMO/TMFts2GsEbvgJsWKYkjaH3XTtTE5kQuuoqZMmz7X09mDkDcRO7M5c/qWmF0MG3+kbO2oIA/PwFz1jKlLVJwlYC6KUNK8YQw20bP0lM=; SRT5=1750166706; REALESTATE=Tue%20Jun%2017%202025%2022%3A30%3A19%20GMT%2B0900%20(Korean%20Standard%20Time); PROP_TEST_KEY=1750167019410.359abaadedb8a570068c3ce5bbef1deebc7f2c5a44a37c30a92f6c59ecae9811; PROP_TEST_ID=6c9a7f31d79e3a247aebc04adac43927ca9728655e30f34e207d2f28e615b450; BUC=EgVrJOA5lXRHq7tjHzfLtiTxIFCbjlWp6NzKFONubyQ=',
+    # 'cookie': 'NNB=4OZOYZDNTYJGO; ASID=b765abe900000192b4624be40000004d; nstore_session=oIBAyZjK8Su+JSDr7idwCXUx; recent_card_list=115,1294; _ga=GA1.2.2045887801.1733061999; nstore_pagesession=iHMv5lqlZTr7OwsLUWR-296388; NFS=2; NAC=ytiQBUw5QeyXB; nid_inf=-2054095709; NID_AUT=jo0oYsQi9vqKBF0iFFxtNuUnrAGbg/25ccZWuT4bgI7PMfDyGNQmXEKdhyhnj7QH; NACT=1; page_uid=jaaj9sqVJLhssfzS4GsssssssUZ-224929; nhn.realestate.article.rlet_type_cd=A01; nhn.realestate.article.trade_type_cd=""; nhn.realestate.article.ipaddress_city=1100000000; _fwb=113w8jjFH5TGUTMbGRiBLNf.1750162120152; landHomeFlashUseYn=Y; _fwb=113w8jjFH5TGUTMbGRiBLNf.1750162120152; SRT30=1750170828; SRT5=1750170828; NID_SES=AAABtKx0gfIOgkPjJJWX/T/L8uGQTEWbMUo2dhGFb8tRns/4MHKHRFaXJY92NSfbrmEcKVl2T75wAZ7rHrEkiAHJTYk3EJp/dGSw9o3Fqq9ecj3etdJUP3Y2mY2dzb8yKoxVYGQk3GuSIB/9FtlwKJ6F8FC6zB4xyS/dhfae26RH/0FyYzfxfAHyOT2t9R2Exa3m4E1cGsAK/iP+45OgE2fJQyDHEt3hV18HB5+6K9U1qW2RdKe55IRhJFhf0AT+W6QWPrc2gBglEFmcOyCiQOExXhFSmqnz0+LHK7SsATFYQZVuiSQ75jxHnLmeGOzFB7YAiREEZHbQTxvAytWt8B4k16ACPOUoo0jH6o69RatdT9IBxUL9+5rRNLTeI/D7gEe+bCFg38tpKcpZiuuNR1uNF+AuPYUQx3vCbbxGiR4KwKVvS5D1UaIBlJS/y2zEBVV2Gem2kHoKctMqSC/aFwCpB/QpnMXR+spptfcJUfocr0Q2nI7YyQoFzQipkS/7BZA2SCI+w/U4oNq8aiA5FnPQg/VGPUcBs5dKbH+oCcNQmcZNHMe2oRsYY8eSKhgWG6iC648jnL7q09dHPfQnxZz0HAk=; REALESTATE=Tue%20Jun%2017%202025%2023%3A34%3A42%20GMT%2B0900%20(Korean%20Standard%20Time); PROP_TEST_KEY=1750170882349.ec3bc9b2d3b46d21c2a05775944c52523f66d747ba1a8b1d7d6721308ee8fcf9; PROP_TEST_ID=02d33b5d533e17817c2977fb3ab903cc51820954c4c2727bb31df5322df7cb77; BUC=vhmvCQLFk-dasyjyYI64XT9RJHswvkI1dmK7Y9O0kbQ=',
 }
 
 # ✅ 데이터 가져오는 함수
