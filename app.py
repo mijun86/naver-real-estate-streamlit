@@ -61,7 +61,7 @@ headers = {
 @st.cache_data
 def fetch_data(min_price, max_price, min_area, max_area):
     all_data = []
-    for page in range(1, 4):  # 1~3페이지
+    for page in range(1, 9):  # 1~3페이지
         url = (
             f"https://new.land.naver.com/api/articles"
             f"?zoom=18&leftLon=126.9160901&rightLon=126.9261001"
@@ -94,7 +94,8 @@ if data:
     selected_cols = [
         "articleNo", "articleName", "realEstateTypeName", "tradeTypeName",
         "floorInfo", "dealOrWarrantPrc", "areaName", "direction",
-        "articleConfirmYmd", "articleFeatureDesc", "buildingName", "realtorName"
+        "articleConfirmYmd", "articleFeatureDesc", "buildingName", "realtorName",
+        "jibunAddress", "address"  # ✅ 주소 정보
     ]
     available_cols = [col for col in selected_cols if col in df.columns]
     df = df[available_cols]
