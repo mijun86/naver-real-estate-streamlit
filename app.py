@@ -55,27 +55,44 @@ headers = {
 @st.cache_data
 def fetch_data():
     all_data = []
-    for page in range(1, 4):  # 1~3페이지까지
+    for page in range(1, 4):
         url = f"https://new.land.naver.com/api/articles?zoom=18&leftLon=126.9160901&rightLon=126.9261001&topLat=37.4782217&bottomLat=37.4744498&order=rank&realEstateType=VL&tradeType=A1&priceMin=0&priceMax=900000000&areaMin=15&areaMax=51&page={page}&priceType=RETAIL"
         res = requests.get(url, headers=headers, cookies=cookies)
 
         if res.status_code == 200:
-            articles = res.json().get("articleList", [])
-            all_data.extend(articles)
+            try:
+                articles = res.json().get("articleList", []) or res.json().get("articles", [])
+                all_data.extend(articles)
+            except Exception as e:
+                st.error(f"⚠️ JSON 파싱 오류: {e}")
         else:
-            st.warning(f"{page}페이지 요청 실패: {res.status_code}")
+            st.warning(f"❌ {page}페이지 요청 실패: {res.status_code}")
     return all_data
 
 # ✅ 데이터 시각화
 data = fetch_data()
+
 if data:
+    st.success(f"📦 {len(data)}건의 매물 데이터를 불러왔습니다.")
     df = pd.DataFrame(data)
-    df = df[[
+
+    # ✅ 컬럼 체크 및 안전 필터링
+    selected_cols = [
         "articleNo", "articleName", "realEstateTypeName", "tradeTypeName",
         "floorInfo", "dealOrWarrantPrc", "areaName", "direction",
         "articleConfirmYmd", "articleFeatureDesc", "buildingName", "realtorName"
-    ]]
-    st.dataframe(df)
+    ]
+    available_cols = [col for col in selected_cols if col in df.columns]
+    df = df[available_cols]
+
+    # ✅ 테이블 출력
+    st.dataframe(df, use_container_width=True)
+
+    # ✅ 다운로드 버튼
     st.download_button("📥 CSV 다운로드", df.to_csv(index=False), file_name="관악구_빌라_매물.csv")
+    
+    # ✅ 첫 매물 상세 JSON 보기 (디버깅용)
+    with st.expander("🔍 첫 매물 원본 JSON 보기"):
+        st.json(data[0])
 else:
-    st.error("불러온 매물이 없습니다. 쿠키 또는 헤더 확인 필요!")
+    st.error("❌ 매물을 불러오지 못했습니다. 쿠키 또는 토큰이 만료되었을 수 있습니다.")
