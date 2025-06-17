@@ -5,6 +5,13 @@ import pandas as pd
 st.set_page_config(page_title="관악구 빌라 실시간 매물", layout="wide")
 st.title("🏡 관악구 빌라 실시간 매물 리스트")
 
+# 👉 사용자 필터 입력
+st.sidebar.header("🔎 필터 설정")
+min_price = st.sidebar.slider("💰 최소 가격 (만원)", 0, 90000, 0, step=500)
+max_price = st.sidebar.slider("💰 최대 가격 (만원)", 0, 90000, 90000, step=500)
+min_area = st.sidebar.slider("📐 최소 전용면적 (㎡)", 0, 100, 0, step=1)
+max_area = st.sidebar.slider("📐 최대 전용면적 (㎡)", 0, 100, 51, step=1)
+
 # 👉 아래에 본인의 Cookie / Header 정보를 넣으세요
 cookies = {
 
@@ -53,15 +60,23 @@ headers = {
 
 # ✅ 데이터 가져오는 함수
 @st.cache_data
-def fetch_data():
+def fetch_data(min_price, max_price, min_area, max_area):
     all_data = []
-    for page in range(1, 4):
-        url = f"https://new.land.naver.com/api/articles?zoom=18&leftLon=126.9160901&rightLon=126.9261001&topLat=37.4782217&bottomLat=37.4744498&order=rank&realEstateType=VL&tradeType=A1&priceMin=0&priceMax=900000000&areaMin=15&areaMax=51&page={page}&priceType=RETAIL"
+    for page in range(1, 4):  # 1~3페이지
+        url = (
+            f"https://new.land.naver.com/api/articles"
+            f"?zoom=18&leftLon=126.9160901&rightLon=126.9261001"
+            f"&topLat=37.4782217&bottomLat=37.4744498"
+            f"&order=rank&realEstateType=VL&tradeType=A1"
+            f"&priceMin={min_price * 10000}&priceMax={max_price * 10000}"
+            f"&areaMin={min_area}&areaMax={max_area}"
+            f"&page={page}&priceType=RETAIL"
+        )
         res = requests.get(url, headers=headers, cookies=cookies)
 
         if res.status_code == 200:
             try:
-                articles = res.json().get("articleList", []) or res.json().get("articles", [])
+                articles = res.json().get("articleList", [])
                 all_data.extend(articles)
             except Exception as e:
                 st.error(f"⚠️ JSON 파싱 오류: {e}")
@@ -70,7 +85,7 @@ def fetch_data():
     return all_data
 
 # ✅ 데이터 시각화
-data = fetch_data()
+data = fetch_data(min_price, max_price, min_area, max_area)
 
 if data:
     st.success(f"📦 {len(data)}건의 매물 데이터를 불러왔습니다.")
@@ -90,8 +105,8 @@ if data:
 
     # ✅ 다운로드 버튼
     st.download_button("📥 CSV 다운로드", df.to_csv(index=False), file_name="관악구_빌라_매물.csv")
-    
-    # ✅ 첫 매물 상세 JSON 보기 (디버깅용)
+
+    # ✅ 첫 매물 상세 JSON 보기
     with st.expander("🔍 첫 매물 원본 JSON 보기"):
         st.json(data[0])
 else:
