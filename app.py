@@ -93,7 +93,7 @@ if data:
 
     # ✅ 매물링크 컬럼 추가
     df["매물링크"] = df["articleNo"].apply(
-        lambda x: f'<a href="https://new.land.naver.com/houses?articleNo={x}" target="_blank">🔗 바로가기</a>'
+        lambda x: f'<a href="https://new.land.naver.com/houses?articleNo={x}" target="_blank">🔗 </a>'
     )
 
     # ✅ 표시할 컬럼 설정
